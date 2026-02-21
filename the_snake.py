@@ -163,7 +163,6 @@ def main():
         # Проверяем поражение при столкновении с телом
         if (snake.get_head_position() in snake.positions[1:]
                 and snake.length > 1):
-            print('Игра завершилась.')  # Допустимо в учебном проекте
             snake.reset()
 
         # Чистка экрана
