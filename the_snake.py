@@ -27,6 +27,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 pygame.display.set_caption('Змейка')
 clock = pygame.time.Clock()
 
+
 # Базовый класс для игровых объектов
 class GameObject:
     """Базовый класс для всех объектов игры."""
@@ -36,7 +37,6 @@ class GameObject:
         self.body_color = None
 
     def draw(self):
-        """Метод для отрисовки объекта на экране."""
         pass
 
 
@@ -51,8 +51,10 @@ class Apple(GameObject):
     def reset(self, snake_positions=None):
         """Устанавливает новую позицию яблока, отличающуюся от тела змейки."""
         while True:
-            new_position = (randint(0, GRID_WIDTH - 1) * GRID_SIZE,
-                            randint(0, GRID_HEIGHT - 1) * GRID_SIZE)
+            new_position = (
+                randint(0, GRID_WIDTH - 1) * GRID_SIZE,
+                randint(0, GRID_HEIGHT - 1) * GRID_SIZE
+            )
             if snake_positions is None or new_position not in snake_positions:
                 self.position = new_position
                 break
@@ -85,10 +87,10 @@ class Snake(GameObject):
         """Осуществляет движение змейки."""
         current_head_position = self.get_head_position()
         dx, dy = self.direction
-        new_head_position_x = (current_head_position[0] +
-                               dx * GRID_SIZE) % SCREEN_WIDTH
-        new_head_position_y = (current_head_position[1] +
-                               dy * GRID_SIZE) % SCREEN_HEIGHT
+        new_head_position_x = ((current_head_position[0] + dx *
+                                GRID_SIZE) % SCREEN_WIDTH)
+        new_head_position_y = ((current_head_position[1] + dy *
+                                GRID_SIZE) % SCREEN_HEIGHT)
         new_head_position = (new_head_position_x, new_head_position_y)
 
         self.positions.insert(0, new_head_position)
