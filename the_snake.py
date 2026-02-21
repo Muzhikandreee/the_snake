@@ -53,9 +53,7 @@ class Apple(GameObject):
         self.reset()
 
     def reset(self, snake_positions=None):
-        """
-        Устанавливает новую позицию яблока, отличную от тела змейки.
-        """
+        """Устанавливает новую позицию яблока, отличную от тела змейки."""
         while True:
             new_position = (
                 randint(0, GRID_WIDTH - 1) * GRID_SIZE,
