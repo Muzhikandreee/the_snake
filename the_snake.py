@@ -1,4 +1,4 @@
-from random import choice, randint
+from random import randint
 import pygame
 
 # Настройки констант
@@ -26,7 +26,6 @@ SPEED = 15
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 pygame.display.set_caption('Змейка')
 clock = pygame.time.Clock()
-
 
 # Базовый класс для игровых объектов
 class GameObject:
@@ -86,10 +85,10 @@ class Snake(GameObject):
         """Осуществляет движение змейки."""
         current_head_position = self.get_head_position()
         dx, dy = self.direction
-        new_head_position_x = (
-            current_head_position[0] + dx * GRID_SIZE) % SCREEN_WIDTH
-        new_head_position_y = (
-            current_head_position[1] + dy * GRID_SIZE) % SCREEN_HEIGHT
+        new_head_position_x = (current_head_position[0] +
+                               dx * GRID_SIZE) % SCREEN_WIDTH
+        new_head_position_y = (current_head_position[1] +
+                               dy * GRID_SIZE) % SCREEN_HEIGHT
         new_head_position = (new_head_position_x, new_head_position_y)
 
         self.positions.insert(0, new_head_position)
@@ -141,7 +140,9 @@ def main():
     apple = Apple()
     snake = Snake()
 
-    while True:
+    running = True
+
+    while running:
         clock.tick(SPEED)
         handle_keys(snake)
         snake.update_direction()
@@ -154,7 +155,7 @@ def main():
 
         # Проверяем поражение при столкновении с телом
         if snake.get_head_position() in snake.positions[1:] and snake.length > 1:
-            print("Игра завершилась.")
+            print('Игра завершилась.')
             snake.reset()
 
         # Чистка экрана
