@@ -80,7 +80,7 @@ class Snake(GameObject):
         self.positions = [self.position]
         self.direction = RIGHT
         self.next_direction = None
-        self.body_color = SNAKE_COLOR
+        self.body_color = SNAKE_COLOR     
 
     def update_direction(self):
         """Обновляет направление движения змейки."""
@@ -92,10 +92,10 @@ class Snake(GameObject):
         """Осуществляет движение змейки."""
         current_head_position = self.get_head_position()
         dx, dy = self.direction
-        new_head_position_x = (current_head_position[0] + dx *
-                               GRID_SIZE) % SCREEN_WIDTH
-        new_head_position_y = (current_head_position[1] + dy *
-                               GRID_SIZE) % SCREEN_HEIGHT
+        new_head_position_x = (current_head_position[0]
+                               + dx * GRID_SIZE) % SCREEN_WIDTH
+        new_head_position_y = (current_head_position[1]
+                               + dy * GRID_SIZE) % SCREEN_HEIGHT
         new_head_position = (new_head_position_x, new_head_position_y)
 
         self.positions.insert(0, new_head_position)
