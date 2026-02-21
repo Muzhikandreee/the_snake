@@ -80,7 +80,7 @@ class Snake(GameObject):
         self.positions = [self.position]
         self.direction = RIGHT
         self.next_direction = None
-        self.body_color = SNAKE_COLOR     
+        self.body_color = SNAKE_COLOR
 
     def update_direction(self):
         """Обновляет направление движения змейки."""
@@ -161,7 +161,8 @@ def main():
             apple.reset(snake.positions)
 
         # Проверяем поражение при столкновении с телом
-        if snake.get_head_position() in snake.positions[1:] and snake.length > 1:
+        if (snake.get_head_position() in snake.positions[1:]
+                and snake.length > 1):
             print('Игра завершилась.')  # Допустимо в учебном проекте
             snake.reset()
 
