@@ -50,6 +50,10 @@ class Apple(GameObject):
         """Инициализирует яблоко."""
         super().__init__()
         self.body_color = APPLE_COLOR
+        self.randomize_position = (
+            randint(0, GRID_WIDTH - 1) * GRID_SIZE,
+            randint(0, GRID_HEIGHT - 1) * GRID_SIZE
+        )
         self.reset()
 
     def reset(self, snake_positions=None):
