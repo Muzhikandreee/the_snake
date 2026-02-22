@@ -1,8 +1,8 @@
 from random import randint
 
-import pygame
-
 import sys
+
+import pygame
 
 
 # Настройки констант
