@@ -71,6 +71,7 @@ class Apple(GameObject):
         """Инициализирует яблоко."""
         position = self.randomize_position(occupied_positions)
         super().__init__(position=position, body_color=apple_color)
+        self.position = position
 
     def randomize_position(self, occupied_positions):
         """Устанавливает новую позицию яблока, отличную от тела змейки."""
