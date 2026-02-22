@@ -67,18 +67,17 @@ class GameObject:
 class Apple(GameObject):
     """Класс для яблока."""
 
-    def __init__(self, position=None, apple_color=APPLE_COLOR):
+    def __init__(self, occupied_positions, apple_color=APPLE_COLOR):
         """Инициализирует яблоко."""
-        if position is None:
-            position = generate_random_position()
+        position = self.randomize_position(occupied_positions)
         super().__init__(position=position, body_color=apple_color)
 
-    def randomize_position(self, snake_positions=None):
+    def randomize_position(self, occupied_positions):
         """Устанавливает новую позицию яблока, отличную от тела змейки."""
         while True:
-            self.position = generate_random_position()
-            if snake_positions is None or self.position not in snake_positions:
-                break
+            new_position = generate_random_position()
+            if new_position not in occupied_positions:
+                return new_position
 
     def draw(self):
         """Рисует яблоко на экране."""
@@ -160,24 +159,25 @@ def main():
     """Главный игровой цикл."""
     pygame.init()
     snake = Snake()
-    apple = Apple()
+    apple = Apple([])
 
-    running = True
-
-    while running:
+    while True:
         clock.tick(SPEED)
         handle_keys(snake)
         snake.update_direction()
         snake.move()
 
+        occupied_positions = set(snake.positions)
+
         # Обновляем позицию яблока, если змейка его съела
         if snake.get_head_position() == apple.position:
             snake.length += 1
-            apple.randomize_position(snake.positions)
+            apple = Apple(list(occupied_positions))
 
         # Проверяем поражение при столкновении с телом
-        elif snake.get_head_position() in snake.positions[1:]:
+        elif snake.get_head_position() in snake.positions[4:]:
             snake.reset()
+            apple = Apple(list(occupied_positions))
 
         # Чистка экрана
         screen.fill(BOARD_BACKGROUND_COLOR)
