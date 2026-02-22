@@ -67,18 +67,19 @@ class GameObject:
 class Apple(GameObject):
     """Класс для яблока."""
 
-    def __init__(self, occupied_positions=None, apple_color=APPLE_COLOR):
+    def __init__(self, position=None, occupied_positions=None,
+                 apple_color=APPLE_COLOR):
         """Инициализирует яблоко."""
-        position = self.randomize_position(occupied_positions)
         super().__init__(position=position, body_color=apple_color)
-        self.position = position
+        self.randomize_position(occupied_positions)
 
-    def randomize_position(self, occupied_positions):
+    def randomize_position(self, occupied_positions=None):
         """Устанавливает новую позицию яблока, отличную от тела змейки."""
         while True:
-            new_position = generate_random_position()
-            if new_position not in occupied_positions:
-                return new_position
+            self.position = generate_random_position()
+            if (occupied_positions is None
+                    or self.position not in occupied_positions):
+                break
 
     def draw(self):
         """Рисует яблоко на экране."""
