@@ -173,7 +173,7 @@ def main():
         # Обновляем позицию яблока, если змейка его съела
         if snake.get_head_position() == apple.position:
             snake.length += 1
-            apple.is_taken_cell(snake.positions)
+            apple.randomize_position(snake.positions)
 
         # Проверяем поражение при столкновении с телом
         elif snake.get_head_position() in snake.positions[1:]:
