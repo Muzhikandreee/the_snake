@@ -4,6 +4,7 @@ import pygame
 
 import sys
 
+
 # Настройки констант
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
 GRID_SIZE = 20
