@@ -161,7 +161,7 @@ def main():
     """Главный игровой цикл."""
     pygame.init()
     snake = Snake()
-    apple = Apple([])
+    apple = Apple(occupied_positions=snake.positions)
 
     while True:
         clock.tick(SPEED)
@@ -169,17 +169,15 @@ def main():
         snake.update_direction()
         snake.move()
 
-        occupied_positions = set(snake.positions)
-
         # Обновляем позицию яблока, если змейка его съела
         if snake.get_head_position() == apple.position:
             snake.length += 1
-            apple = Apple(list(occupied_positions))
+            apple.randomize_position(occupied_positions=snake.positions)
 
         # Проверяем поражение при столкновении с телом
         elif snake.get_head_position() in snake.positions[4:]:
             snake.reset()
-            apple = Apple(list(occupied_positions))
+            apple.randomize_position(occupied_positions=snake.positions)
 
         # Чистка экрана
         screen.fill(BOARD_BACKGROUND_COLOR)
