@@ -1,7 +1,7 @@
 import sys
+from random import randint
 
 import pygame
-from random import randint
 
 # Настройки констант
 SCREEN_WIDTH, SCREEN_HEIGHT = 640, 480
