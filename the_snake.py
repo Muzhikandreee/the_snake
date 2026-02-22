@@ -67,13 +67,13 @@ class GameObject:
 class Apple(GameObject):
     """Класс для яблока."""
 
-    def __init__(self, randomize_position=None, apple_color=APPLE_COLOR):
+    def __init__(self, position=None, apple_color=APPLE_COLOR):
         """Инициализирует яблоко."""
-        if randomize_position is None:
-            randomize_position = generate_random_position()
-        super().__init__(position=randomize_position, body_color=apple_color)
+        if position is None:
+            position = generate_random_position()
+        super().__init__(position=position, body_color=apple_color)
 
-    def is_taken_cell(self, snake_positions=None):
+    def randomize_position(self, snake_positions=None):
         """Устанавливает новую позицию яблока, отличную от тела змейки."""
         while True:
             self.position = generate_random_position()
